@@ -1,0 +1,23 @@
+{
+  "adapter": "aspace-dream-rsi-adapter",
+  "version": "0.1.0",
+  "upstream": {
+    "repo": "google-research/dream-rsi",
+    "license": "Apache-2.0",
+    "frozen_commit": "8ec35bd",
+    "version": "0.1.0"
+  },
+  "surface": {
+    "cli": "python3 -m dream_rsi --help ; dream-rsi learning <sous-commande> (hors-ligne)",
+    "entry": "dream_rsi.cli.main:main(argv)",
+    "offline": true,
+    "notes": "La section learning (replay, export, allocate, discover, directions) est hors-ligne. Les sections explore / evolve appellent un agent de codage réel et ne sont jamais invoquées par l'adapter."
+  },
+  "never": [
+    "dream-rsi explore / evolve (agent de codage réel, appels API)",
+    "les évaluateurs KernelBench (requêtes POST vers un serveur GPU)",
+    "tout appel réseau"
+  ],
+  "env": {},
+  "telemetry": "aucun SDK télémétrie ; zéro appel réseau dans le paquet. Réseau confiné aux évaluateurs KernelBench (POST vers un serveur GPU explicite), jamais invoqués ici (voir TELEMETRY-AUDIT)"
+}
